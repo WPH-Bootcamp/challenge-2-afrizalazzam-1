@@ -1,14 +1,88 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>Challenge - 2</title>
-  </head>
-  <body>
-    <!-- code here -->
-  </body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tech. — Build with the Future</title>
+
+  <!-- ── Google Fonts ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- Header di-load via JS -->
+  <div id="include-header"></div>
+
+  <!-- MAIN — Konten utama halaman -->
+  <main id="main-content">
+    <div id="include-hero"></div>
+    <div id="include-about"></div>
+    <div id="include-services"></div>
+    <div id="include-work"></div>
+    <div id="include-team"></div>
+    <div id="include-contact"></div>
+  </main>
+
+  <!-- Footer di-load via JS -->
+  <div id="include-footer"></div>
+
+  <script>
+    async function includeHTML(id, file) {
+      const res = await fetch(file);
+      const html = await res.text();
+      document.getElementById(id).innerHTML = html;
+    }
+
+    Promise.all([
+      includeHTML('include-header',   'layouts/header.html'),
+      includeHTML('include-hero',     'layouts/hero.html'),
+      includeHTML('include-about',    'layouts/about.html'),
+      includeHTML('include-services', 'layouts/services.html'),
+      includeHTML('include-work',     'layouts/work.html'),
+      includeHTML('include-team',     'layouts/team.html'),
+      includeHTML('include-contact',  'layouts/contact.html'),
+      includeHTML('include-footer',   'layouts/footer.html'),
+    ]).then(() => {
+      // Sidebar mobile toggle — dijalankan setelah semua layout selesai di-load
+      const hamburger    = document.getElementById('hamburger');
+      const sidebar      = document.getElementById('sidebar');
+      const sidebarClose = document.getElementById('sidebarClose');
+      const overlay      = document.getElementById('overlay');
+
+      function openMenu() {
+        sidebar.classList.add('open');
+        overlay.classList.add('show');
+        hamburger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      hamburger.addEventListener('click', openMenu);
+      sidebarClose.addEventListener('click', closeMenu);
+      overlay.addEventListener('click', closeMenu);
+
+      sidebar.querySelectorAll('a').forEach(link =>
+        link.addEventListener('click', closeMenu)
+      );
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeMenu();
+      });
+    });
+  </script>
+
+</body>
 </html>

@@ -1,0 +1,71 @@
+<!-- OVERLAY — backdrop gelap saat sidebar mobile terbuka -->
+<div id="overlay" aria-hidden="true"></div>
+
+<!-- SIDEBAR MOBILE Menggunakan <aside> karena merupakan konten navigasi tambahan. Atribut role="dialog" dan aria-modal="true" untuk aksesibilitas. -->
+<aside
+  id="sidebar"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menu navigasi mobile"
+>
+  <!-- Baris atas: logo + tombol tutup -->
+  <div class="sidebar__header">
+    <a href="#home" class="sidebar__logo">Tech.</a>
+    <button
+      class="sidebar__close"
+      id="sidebarClose"
+      aria-label="Tutup menu navigasi"
+    >&#x2715;</button>
+  </div>
+
+  <!-- Navigasi mobile -->
+  <nav class="sidebar__nav" aria-label="Navigasi mobile">
+    <a href="#about">About</a>
+    <a href="#service">Service</a>
+    <a href="#work">Our Work</a>
+    <a href="#team">Team</a>
+  </nav>
+
+  <!-- CTA di bawah sidebar -->
+  <div class="sidebar__footer">
+    <a href="#contact" class="btn btn--primary btn--lg">Contact Us</a>
+  </div>
+</aside>
+
+<!-- HEADER — Navigasi utama (sticky) Menggunakan <header> sebagai landmark semantik. -->
+<header class="site-header" role="banner">
+
+  <!-- Logo -->
+  <a href="#home" class="site-header__logo" aria-label="Tech. — Kembali ke beranda">
+    Tech.
+  </a>
+
+  <!-- Navigasi desktop -->
+  <nav class="site-header__nav" aria-label="Navigasi utama">
+    <a href="#about">About</a>
+    <a href="#service">Service</a>
+    <a href="#work">Our Work</a>
+    <a href="#team">Team</a>
+  </nav>
+
+  <!-- Tombol CTA desktop -->
+  <a
+    href="#contact"
+    class="btn btn--primary btn--sm site-header__cta"
+    aria-label="Hubungi kami"
+  >Contact Us</a>
+
+  <!-- Tombol hamburger (hanya mobile) -->
+  <button
+    class="hamburger"
+    id="hamburger"
+    aria-label="Buka menu navigasi"
+    aria-expanded="false"
+    aria-controls="sidebar"
+  >
+    <span class="hamburger__line"></span>
+    <span class="hamburger__line"></span>
+    <span class="hamburger__line"></span>
+  </button>
+
+</header>
